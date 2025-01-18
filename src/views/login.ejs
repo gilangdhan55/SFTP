@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFTP - <%= title %></title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap; 
+            margin-left: -15px; 
+            margin-right: -15px;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .container {
+            border-radius: 5px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px; 
+            width: 100%;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .vcenter {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .form-control{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 1.4em;
+        }
+ 
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: left;
+        }
+
+        .btn-primary {
+            background: #2f2fff;
+            color: white;
+        }
+
+        .btn-primary:hover{
+            background: blue;
+        }
+
+        /* Kolom */
+        [class*="col-"] {
+            padding: 15px; /* Memberikan jarak antar kolom */
+            flex-basis: 0; /* Agar kolom fleksibel */
+            flex-grow: 1; /* Kolom tumbuh jika ada ruang kosong */
+            max-width: 100%; /* Default: kolom penuh */
+        }
+
+        /* Grid berdasarkan 12 kolom */
+        .col-1 { flex: 0 0 8.33%; max-width: 8.33%; } /* 1/12 */
+        .col-2 { flex: 0 0 16.66%; max-width: 16.66%; } /* 2/12 */
+        .col-3 { flex: 0 0 25%; max-width: 25%; }      /* 3/12 */
+        .col-4 { flex: 0 0 33.33%; max-width: 33.33%; } /* 4/12 */
+        .col-5 { flex: 0 0 41.66%; max-width: 41.66%; } /* 5/12 */
+        .col-6 { flex: 0 0 50%; max-width: 50%; }      /* 6/12 */
+        .col-7 { flex: 0 0 58.33%; max-width: 58.33%; } /* 7/12 */
+        .col-8 { flex: 0 0 66.66%; max-width: 66.66%; } /* 8/12 */
+        .col-9 { flex: 0 0 75%; max-width: 75%; }      /* 9/12 */
+        .col-10 { flex: 0 0 83.33%; max-width: 83.33%; } /* 10/12 */
+        .col-11 { flex: 0 0 91.66%; max-width: 91.66%; } /* 11/12 */
+        .col-12 { flex: 0 0 100%; max-width: 100%; }   /* 12/12 */
+
+        .text-right{
+            text-align: right;
+        }
+        
+        .background-default{
+            background-image: url('/img/background/bg-header.webp'); 
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        .card-box {
+            position: fixed;
+            z-index: 2;
+            background: linear-gradient(178deg, #450909, #f30909);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            -ms-transform: translate(-50%, -50%);
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 1px 1px 13px 2px #0000008f;
+            padding: 20px;
+            color: white;
+        }
+
+        .form-control.username{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #951616;
+            border-radius: 0;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .form-control.username::placeholder{
+            text-align: center;
+            text-transform: uppercase; 
+        }
+
+        .form-control.username:focus{
+            border: none;
+            border-bottom: 1px solid #ffffff;
+            border-radius: 0;
+            background: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .card-box h2{
+            text-align: center;
+            margin: 15px;
+        }
+
+        .step-username {
+            display: flex;
+            flex-direction: column;
+        }
+
+        button.btn.btn-next {
+            background: linear-gradient(45deg, #690000, transparent);
+            color: white;
+            border: 1px solid #ff000000;
+            box-shadow: 2px 1px 11px 0px #ff0f0f;
+        }
+
+        button.btn.btn-next:hover {
+            background: linear-gradient(45deg, #951616, transparent);
+            border: 1px solid white;
+            color: white;
+            box-shadow: 2px 1px 11px 0px white;
+        }
+
+        .d-box {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body> 
+    <div class="container"> 
+        <div class="col-12 card-box">
+            <h2>LOGIN SFTP</h2>
+            <div class="step-username">
+                <input type="text" class="username form-control" id="username" name="username" placeholder="masukan username">
+                <div class="d-box">
+                    <div>&nbsp;</div>
+                    <button type="button" class="btn btn-next" data-next="step-password">Next</button>
+                </div>
+            </div>
+        </div> 
+        <div class="background-default"></div>
+    </div> 
+    
+</body>
+</html>
