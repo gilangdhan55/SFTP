@@ -1,0 +1,39 @@
+[2025-01-19 00:16:39] [logger] error: uncaughtException: Operation `users.findOne()` buffering timed out after 10000ms
+MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (C:\cobaNode\SFTP\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:185:23)
+    at listOnTimeout (node:internal/timers:573:17)
+    at process.processTimers (node:internal/timers:514:7)
+[2025-01-19 00:20:06] [logger] error: uncaughtException: Operation `users.findOne()` buffering timed out after 10000ms
+MongooseError: Operation `users.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (C:\cobaNode\SFTP\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:185:23)
+    at listOnTimeout (node:internal/timers:573:17)
+    at process.processTimers (node:internal/timers:514:7)
+[2025-01-19 00:30:10] [logger] error: uncaughtException: usersCollection.findByUsername is not a function
+TypeError: usersCollection.findByUsername is not a function
+    at saveSignup (file:///C:/cobaNode/SFTP/src/controller/auth.js:23:43)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[2025-01-19 00:32:10] [logger] error: uncaughtException: usersCollection.findByUsername is not a function
+TypeError: usersCollection.findByUsername is not a function
+    at saveSignup (file:///C:/cobaNode/SFTP/src/controller/auth.js:19:43)
+[2025-01-19 00:37:27] [logger] error: uncaughtException: usersCollection.findByUsername is not a function
+TypeError: usersCollection.findByUsername is not a function
+    at saveSignup (file:///C:/cobaNode/SFTP/src/controller/auth.js:19:43)
+[2025-01-19 16:16:32] [logger] error: uncaughtException: data is not defined
+ReferenceError: data is not defined
+    at loginValid (file:///C:/cobaNode/SFTP/src/validation/auth.js:37:39)
+    at process (file:///C:/cobaNode/SFTP/src/controller/AuthController.js:15:26)
+    at Layer.handle [as handle_request] (C:\cobaNode\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\cobaNode\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\cobaNode\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\cobaNode\SFTP\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\cobaNode\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at C:\cobaNode\SFTP\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\cobaNode\SFTP\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\cobaNode\SFTP\node_modules\express\lib\router\index.js:280:10)
+[2025-01-19 18:08:01] [logger] error: uncaughtException: data is not defined
+ReferenceError: data is not defined
+    at process (file:///C:/cobaNode/SFTP/src/controller/AuthController.js:20:60)
+[2025-01-19 18:13:10] [logger] error: uncaughtException: bcrypt is not defined
+ReferenceError: bcrypt is not defined
+    at process (file:///C:/cobaNode/SFTP/src/controller/AuthController.js:30:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

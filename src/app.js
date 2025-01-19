@@ -3,8 +3,11 @@ import routes from "./routes/index.js";
 import appMiddleWare from "./middleware/index.js"; 
 import path from "path";
 import url from "url";
+import {db2} from "./utils/db.js";
 
 const app           = express();
+await db2();
+
 const port          = 3000;
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));

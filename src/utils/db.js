@@ -26,7 +26,9 @@ const db = async () => {
 
 const db2 = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 30000
+        });
         console.log('MongoDB connected successfully');
     } catch (err) {
         console.error('Error connecting to MongoDB:', err.message);
@@ -34,4 +36,4 @@ const db2 = async () => {
     }
 }
   
-export {db}
+export {db, db2, mongoose}
