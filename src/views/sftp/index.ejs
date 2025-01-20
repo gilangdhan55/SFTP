@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/font/tabler_icon.css">
+    <style>
+        @import url('../font/roboto.css');
+
+        :root{
+            --theme-bg: #3a3636;
+            --color-primary: #ffffff;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            scroll-behavior: smooth; 
+            background: var(--theme-bg);
+            color: var(--color-primary);
+        }
+
+        .layout-wrapper, .layout-container {
+            width: 100%;
+            display: flex;
+            flex: 1 1 auto;
+            align-items: stretch;
+        }
+
+        #sidebar {
+            display: flex;
+            width: 20%;
+            background: var(--theme-bg);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+            box-shadow: 3px 0px 9px 0px #00000080;
+        }
+
+        .app-brand {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 64px;
+        }
+
+        .menu-vertical .app-brand {
+            padding-right: 1rem;
+            padding-left: 1.375rem;
+        }
+         
+        .app-brand-link {
+            text-decoration: none;
+            color: var(--color-primary);
+            display: flex; 
+            align-items: center;
+        }
+        .app-brand-logo {
+            align-items: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            display: -ms-flexbox;
+            display: flex;
+            width: 70px;
+            height: 100%;
+            display: block;
+            flex-grow: 0;
+            flex-shrink: 0;
+            overflow: hidden;
+            min-height: 1px;
+        }
+        .menu .app-brand {
+            width: 100%;
+            transition: padding .3s ease-in-out;
+        }
+        .layout-menu-toggle .menu-toggle-icon::before {
+            content: "";  
+        }
+        a.layout-menu-toggle{
+            text-decoration: none;
+            color: var(--color-primary);
+        }
+
+        a.layout-menu-toggle:hover{
+            background-color: transparent !important;
+            color: #ff0000;
+        }
+
+        .app-brand-text {
+            font-size: 1.375rem;
+            flex-shrink: 0;
+            opacity: 1;
+            transition: opacity .3s ease-in-out;
+            margin-inline-start: .75rem !important;
+        }
+ 
+        li.menu-item.menu-link {
+            padding: 0.4rem 1rem;
+            /* background: white; */
+            border-radius: 10px; 
+            margin-bottom: 8px;
+        }
+
+        .menu-container-items {
+            padding-top: 10px;
+            position: fixed;
+            top: 80px;
+            width: 20%;
+            display: flex;
+            flex-direction: column; /* Pastikan ini untuk elemen vertikal */
+            height: calc(100vh - 80px); /* Sisakan ruang untuk app-brand */
+            overflow-y: auto; /* Aktifkan scroll pada y-axis */
+        }
+
+        .menu-container-items::-webkit-scrollbar {
+            display: none;
+
+        }
+
+        ul.menu-content {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+        }
+        .menu-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex: 0 1 auto;
+            margin: 0;
+        }
+        .menu-link:hover{
+            cursor: pointer;
+            background-color: white;
+        }
+        .menu-link:hover .menu-text { 
+            text-decoration: none;
+            color: black;
+        }
+        .menu-text{
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-vertical .menu-item .menu-link {
+            font-size: .9375rem;
+            min-height: 38px;
+        }
+        
+        .menu{
+            display: flex;
+        } 
+        
+        .menu-icon {
+            flex-grow: 0;
+            flex-shrink: 0;
+            margin-right: .5rem;
+            line-height: 1;
+            font-size: 1.375rem;
+        }
+
+        .menu-text.menu > * {
+            flex:0 1 auto;
+        }
+
+        .menu:not(.menu-no-animation) .menu-link>:not(.menu-icon) {
+            transition: opacity .3s ease-in-out;
+        }
+
+        .menu-link>:not(.menu-icon) {
+            flex: 0 1 auto;
+            opacity: 1;
+        }
+
+        @media screen and (max-width: 430px) {
+            .app-brand-link{
+
+            }
+            
+            .menu-item.menu-link a span{
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                opacity: 0;
+            }
+
+            #sidebar{
+                width: 15%;
+            }
+        }
+    </style>
+</head>
+<body>  
+    <div class="layout-wrapper">
+        <div class="layout-container">
+            <aside id="sidebar" class="menu-vertical">
+                <div class="app-brand">
+                    <a href="javascript:void(0)" class="app-brand-link">
+                        <span class="app-brand-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 170 170">
+                                <path xmlns="http://www.w3.org/2000/svg" fill="red" d="M48.5 36.9c.3.6-.1 1.4-1 1.8-1.2.7-9.5 21.9-9.5 24.5 0 .4 5.2.8 11.6.8 6.3 0 12.4.5 13.5 1 2.4 1.3 2.4 4.4.3 13.9-2.6 11.2-3 11.5-17.3 11.9l-12 .4-3.8 3.6c-3.3 3-4.5 5.6-8.9 18.6-2.8 8.3-5.3 15.8-5.5 16.6-.3 1.2 1.2 1.6 9.1 1.8 14.2.4 14.3.3 20.5-18.6 2.4-7.3 4.7-12.5 6.5-14.5 2.8-3.2 2.9-3.2 14.9-3.7 6.8-.3 12.5-1 13.1-1.6 1.5-1.5 17-43.2 17-45.6 0-2.8-2.6-7.4-5.6-9.7-2.5-2-3.9-2.1-23.1-2.1-12.5 0-20.2.4-19.8.9z"/>
+                                <path d="M123.3 43.1c-2.6 2.8-5.2 5.8-5.7 6.7-.5.9-1.6 2.3-2.3 3-.7.7-1.3 1.8-1.3 2.3 0 2.4-18.7 24.8-21.8 26.2-1.5.6-2.8 1.2-3 1.3-.1.1 2.7 9.1 6.2 20.1 7 21.1 8 23 15.6 26.9 3.3 1.7 21 3.4 21 2.1 0-1.8-10.4-33.6-12-36.7-2.1-4.1-7.7-9.5-10.9-10.5-3.7-1.1-2.3-2.2 5.2-4 13.4-3.2 14.8-4.3 29.4-23.1 7.3-9.3 13.2-17.5 13.3-18.2 0-.9-3.5-1.2-14.4-1.2h-14.5l-4.8 5.1zM79.5 99.9c-.6.5-4.8 1.1-9.5 1.3-7.6.3-8.9.6-12.1 3.2-3.2 2.5-4.1 4.3-7.3 14.7-2 6.5-3.6 12-3.6 12.3 0 .3 4.3.6 9.5.6 10.8 0 14.6-1.3 16.9-5.8 1.3-2.5 9.6-25.7 9.6-26.8 0-.8-2.6-.4-3.5.5z"/>
+                              </svg>
+                        </span>
+                        <div class="app-brand-text menu-text fw-bold">SFTP</div>
+                    </a>
+                    <a href="javascript:void(0);" id="collapse" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
+                        <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+                    </a>
+                </div>
+                <div class="menu-container-items">
+                    <ul class="menu-content">
+                        <% for(let i=0; i < 20; i++) { %>
+                        <li class="menu-item menu-link">
+                            <a href="javascript:void(0)" class="menu-text menu">
+                                <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                                <span>Dashboard <%= i %></span>
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <script src="/js/boostrap/bootstrap.bundle.min.js" ></script>
+    <script>
+        // const sidebar = document.getElementById('sidebar');
+        // const content = document.getElementById('content');
+        // const toggleSidebar = document.getElementById('toggleSidebar');
+
+        // toggleSidebar.addEventListener('click', () => {
+        //     sidebar.classList.toggle('collapsed');
+        // });
+    </script>
+</body>
+</html>
