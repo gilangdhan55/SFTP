@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="layout-menu-fixed">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="/font/tabler_icon.css">
     <style> 
         :root {
-            --theme-bg: #3a3636;
+            --theme-bg: #2f3349;
+            --bg-card: #25293c;
             --color-primary: #ffffff;
             --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         }
 
         body {
             scroll-behavior: smooth; 
-            background: var(--theme-bg);
+            background: var(--bg-card);
             color: var(--color-primary);
             font-family: var(--bs-font-sans-serif);
             margin: 0;
@@ -28,17 +29,21 @@
         }
 
         .menu {
-            display: flex;
-            flex-direction: column;
-            background: var(--theme-bg);
-            color: var(--color-primary);
-            transition: width 0.3s ease-in-out;
-            box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            display: none;
         }
-
-       
-
+        @media screen and (min-width: 1px) {
+            .menu {
+                display: flex;
+                flex-direction: column;
+                background: var(--theme-bg);
+                color: var(--color-primary);
+                transition: width 0.3s ease-in-out;
+                box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                position: fixed;
+            }
+        }
+ 
         .menu.menu-collapse {
             width: 4.375rem;
         }
@@ -63,13 +68,13 @@
         .app-brand-logo img { 
             width: 50px; 
         }
-
-         
-
+ 
         .menu-inner {
             overflow-y: auto;
             flex-grow: 1;
-            padding: 1rem 0;
+            padding: 1rem 0.812rem;
+            height: 100vh;
+            padding-bottom: 4.3rem;
         }
 
         .menu-inner::-webkit-scrollbar {
@@ -81,22 +86,44 @@
             border-radius: 3px;
         }
 
-        .menu-item {
+        .menu-item, .menu-header {
             list-style: none;
             margin: 0.5rem 0;
+            
         }
 
-        .menu-link {
+        .menu-link, .menu-header {
+            margin: 0 -5px;
             display: flex;
             align-items: center;
             padding: 0.5rem 1rem;
             text-decoration: none;
             color: var(--color-primary);
             border-radius: 0.375rem;
+            position: relative;
         }
 
-        .menu-link:hover {
+        /* .menu-link:not(.layout-menu-toggle):hover {
             background: rgba(255, 255, 255, 0.1);
+        } */
+
+        .menu .menu-inner .menu-item .menu-link>span:not(.badge) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.467;
+        }
+        .menu .menu-inner .menu-item .menu-link {
+            font-size: 0.9375rem;
+            min-height: 38px;
+        }
+
+        .menu .menu-inner .menu-item .menu-link .menu-text { 
+            margin-right: 0.5rem;
+        }
+
+        .menu-item{
+            
         }
 
         .menu-icon {
@@ -110,10 +137,49 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            transform: translateX(0px); 
+            opacity: 1;
         }
 
-        .menu-collapse .menu-text {
-            display: none;
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-header .menu-header-text {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner{
+            overflow: hidden;
+        }
+
+
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse .menu-inner .menu-header::before{
+            content: "";
+            position: absolute;
+            left: 1rem;
+            height: 1px;
+            width: 1.375rem;
+            background-color: #e6e6e8; 
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi smooth */
+        }
+      
+
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse .menu-text {
+            /* display: none; */
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .layout-content-navbar .menu.menu-collapse .menu-text {
+            /* display: none; */
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu .menu-inner .menu-header:has(.menu-collapse) .menu-header-text{
+            opacity: 0;
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse .menu-header .menu-header-text{
+            opacity: 1;
+            transform: translateX(0px);
         }
          
         .menu.menu-collapse.menu-fixed{
@@ -132,83 +198,376 @@
             opacity: 1;
             transition: opacity 0.3s ease-in-out;
         }
+
+        .menu-vertical .menu-header {
+            padding: 1.25rem 1.5rem .375rem;
+        }
+
+        .menu-header {
+            opacity: 1;
+            transition: opacity .3s ease-in-out;
+        }
+
+        .menu-header .menu-header-text {
+            text-transform: uppercase;
+            letter-spacing: .4px;
+            white-space: nowrap;
+            color: #acaab1;  
+        }
+ 
+        .layout-content-navbar .layout-page {
+            flex-basis: 100%;
+            flex-direction: column;
+            width: 0;
+            min-width: 0;
+            max-width: 100%;
+        }
+        .layout-page {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: stretch;
+            padding: 0;
+        }
+
+        .layout-page {
+            padding-top: 56px !important;
+            transition: padding-left 0.3s ease-in-out;
+        }
+
+        .layout-menu-fixed.layout-page {
+            transition: padding-left 0.65s linear;
+        }
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-page {
+            padding-left: 4.375rem; 
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed .layout-page {
+            padding-left: 4.375rem;
+        }
+
+        .layout-menu-fixed:not(.layout-menu-collapsed) .layout-page,  .layout-menu-fixed.layout-menu-collapsed .layout-page:has(.menu-collapse.menu-fixed) {
+            padding-left: 16.25rem;  
+        }
+
+        .layout-page, .content-wrapper, .content-wrapper>*, .layout-menu {
+            min-height: 1px;
+        }
+
+        .menu-inner .menu-item .menu-link.active:not(.menu-toggle) {
+            background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%);
+            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
+            color: #fff !important;
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-item .menu-link>div {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse.menu-fixed .menu-inner .menu-item .menu-link>div {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+        .menu-inner .menu-item:not(.open)>.menu-sub {
+            display: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .menu-inner .menu-item.open>.menu-sub {
+            display: flex; 
+            flex-direction: column;
+            padding-left: 1rem;
+        }
+        .menu-inner .menu-item .menu-sub {  
+            transition: max-height .3s;
+        }
+
+        .menu-sub>.menu-item>.menu-link .menu-icon {
+            display: none;
+        }
+        .menu-sub>.menu-item>.menu-link:before {
+            content: "";
+            font-family: "tabler-icons";
+            position: absolute;
+            font-size: .75rem;
+            font-weight: bold;
+            left: 1.1rem;
+        }
+
+        .menu-sub>.menu-item>.menu-link>div {
+            padding-left: 1.3rem;
+        }
+        
+        .menu-sub>.menu-item>.menu-link .menu-icon {
+            display: none;
+        }
+  
+        .menu-inner .menu-item .menu-toggle::after {
+            right: .75rem;
+        }
+
+        .menu-toggle::after {
+            position: absolute;
+            top: 50%;
+            display: block;
+            font-family: "tabler-icons";
+            font-size: 1.375rem;
+            transform: translateY(-50%);
+        }
+
+        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-item .menu-link.menu-toggle::after { 
+            display: none;
+        }
+
+        .menu-toggle::after {
+            content: "";
+        }
+
+        .menu-inner .menu-item.open:not(.menu-item-closing)>.menu-link:after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+        .menu-inner .menu-item .menu-toggle::after {
+            right: .75rem;
+        }
+        .menu:not(.menu-no-animation) .menu-toggle::after {
+            transition-duration: .3s;
+            transition-property: -webkit-transform, transform;
+        }
+
+        .menu-inner .menu-item .menu-toggle {
+            padding-right: calc(0.75rem + 1.76em);
+        }
+
+        .menu-link:not(.active, .layout-menu-toggle):hover{
+            background: #6d6d6d4f;
+            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
+            color: #fff !important;
+        }
+
+        .menu-item.open .menu-link:not(.menu-sub .menu-item .menu-link){
+            background: #6d6d6d4f;
+            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
+            color: #fff !important;
+        }
+        .menu-item.open .menu-link .menu-sub .menu-item .menu-link.active{ 
+            background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%);
+            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
+            color: #fff !important;
+        }
+
+        /* navbar */
+        .layout-navbar-fixed:not(.layout-menu-collapsed)   {
+            left: 16.25rem;
+        }
     </style>
 </head>
 <body>
-    <div class="layout-wrapper">
+    <div class="layout-wrapper layout-content-navbar">
         <aside id="sidebar" class="menu">
             <div class="app-brand">
                 <div class="app-brand-logo">
                     <img src="/img/pklogo.png"  class="img-icon" alt="pk-logo">
                 </div>
                 <div class="app-brand-text">SFTP</div>
-                <a href="javascript:void(0);" id="collapse" data-collapsed="true" class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="ti ti-circle-dot d-none d-xl-block ti-sm align-middle" id="icon"></i> 
+                <a href="javascript:void(0);"  class="layout-menu-toggle menu-link text-large ms-auto">
+                    <i class="ti ti-circle-dot d-none d-xl-block ti-sm align-middle toggle-collapse"  data-collapsed="true" id="icon"></i> 
                     
                     <i class="ti ti-x d-block d-xl-none ti-sm align-middle" id="icon-x"></i>
                 </a>
             </div>
             <ul class="menu-inner">
-                <% for(let i = 0; i < 20; i++) { %>
+                 <% let i = 0 %>
                     <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link">
+                        <a href="javascript:void(0)" class="menu-link <%= i === 0 ? 'active' : '' %>">
                             <i class="menu-icon ti ti-smart-home"></i>
                             <span class="menu-text">Menu Item <%= i %></span>
                         </a>
                     </li>
-                <% } %>
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <i class="menu-icon ti ti-lock"></i>
+                            <span class="menu-text">Menu Item <%= i %></span>
+                        </a>
+                    </li>
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Master</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons ti ti-users"></i>
+                            <div data-i18n="Datatables">Users</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="https://app2.pkserve.com/pkvisit/master/users" class="menu-link active">
+                                    <i class="menu-icon tf-icons ti ti-users"></i>
+                                    <div>Users</div>
+                                </a>
+                            </li>  
+                            <li class="menu-item">
+                                <a href="https://app2.pkserve.com/pkvisit/master/position" class="menu-link ">
+                                    <i class="menu-icon tf-icons ti ti-users"></i>
+                                    <div>Position</div>
+                                </a>
+                            </li>  
+                            <li class="menu-item">
+                                <a href="javascript:void(0)" class="menu-link ">
+                                    <i class="menu-icon tf-icons ti ti-users"></i>
+                                    <div>Role</div>
+                                </a>
+                            </li>  
+                        </ul>  
+                    </li> 
             </ul>
         </aside>
-        <main style="flex-grow: 1; padding: 2rem;">
-            <h1>Content Area</h1>
-            <p>Here is your main content.</p>
-        </main>
+        
+        <div class="layout-page">
+            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="ti ti-menu-2 ti-sm"></i>
+                    </a>
+                </div>
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- User -->
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-online">
+                                    <img src="/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <span class="fw-medium d-block">GILANG RAMADHAN</span>
+                                                <small class="text-muted">Developer</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti ti-user-check me-2 ti-sm"></i>
+                                        <span class="align-middle">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        <i class="ti ti-settings me-2 ti-sm"></i>
+                                        <span class="align-middle">Settings</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="https://app2.pkserve.com/pkvisit/apps/logout">
+                                        <i class="ti ti-logout me-2 ti-sm"></i>
+                                        <span class="align-middle">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--/ User --> 
+                    </ul>
+                </div>
+
+
+                <!-- Search Small Screens -->
+                <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+                    <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
+                </div> 
+            </nav>
+            <h1>SFTP</h1>
+            <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus laudantium labore nisi, explicabo suscipit, error accusamus delectus non atque numquam alias adipisci quibusdam aperiam maxime quos quas beatae vitae illum!</h1>
+        </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const sidebar = document.getElementById("sidebar");
-            const collapseBtn = document.getElementById("collapse");
-            const dot = collapseBtn.querySelector('#icon');
-            const iconx = collapseBtn.querySelector('#icon-x'); 
-            const isCollapseds = sessionStorage.getItem("menuCollapsed") === "true";
+            const sidebar       = document.getElementById("sidebar");
+            const collapseBtn   = document.querySelector(".toggle-collapse");  
+            const iconx         = document.getElementById("icon-x");
+            const isCollapseds  = sessionStorage.getItem("menuCollapsed") === "true";
+            const classHtml     = sessionStorage.getItem("classHtml");
+            const htmlPage      = document.querySelector('html');
+            const menuToggle    = document.querySelectorAll(".menu-toggle");
+            const menuInner     = document.querySelector('.menu-inner');
+
             collapseBtn.addEventListener("click", () => {
                 sidebar.classList.toggle("menu-collapse");
                 const isCollapsed = collapseBtn.getAttribute("data-collapsed") === "true";
                 collapseBtn.setAttribute("data-collapsed", !isCollapsed);
-                sessionStorage.setItem("menuCollapsed", !isCollapsed);
-                if(dot.classList.contains("ti-circle-dot")){
-                    dot.classList.remove("ti-circle-dot")
-                    dot.classList.add("ti-circle") 
-                }else{ 
-                    dot.classList.add("ti-circle-dot")
-                    dot.classList.remove("ti-circle") 
-                }
+                sessionStorage.setItem("menuCollapsed", !isCollapsed);  
+                htmlPage.classList.toggle('layout-menu-collapsed'); 
+                toggleClass(collapseBtn, "ti-circle-dot", "ti-circle"); 
             });
+  
+            collapseBtn.setAttribute("data-collapsed", isCollapseds);
+            if(isCollapseds){
+                sidebar.classList.add("menu-collapse");
+                collapseBtn.style.display = 'bloack !important';
+                collapseBtn.classList.add("ti-circle") 
+                iconx.style.display = 'none !important';
+                collapseBtn.classList.remove("ti-circle-dot")
+                htmlPage.classList.add('layout-menu-collapsed'); 
+            }
 
             sidebar.addEventListener('mouseenter', () => {
-                if(sidebar.classList.contains('menu-collapse')) {
+                if(sidebar.classList.contains('menu-collapse')) { 
+                    htmlPage.classList.add('layout-menu-hover'); 
+                    iconx.style.display = 'none !important'; 
                     sidebar.classList.add('menu-fixed');
-                    dot.style.display = 'bloack !important';
-                    iconx.style.display = 'none !important';
+                    collapseBtn.style.display = 'block !important'; 
                 }
             });
 
             sidebar.addEventListener('mouseleave', () => {
                 sidebar.classList.remove('menu-fixed');
-                iconx.style.display = 'bloack !important';
-                dot.style.display = 'none !important';
+                iconx.style.display = 'block !important';
+                collapseBtn.style.display = 'none !important';
+                if(sidebar.classList.contains('menu-collapse')) { 
+                    htmlPage.classList.remove('layout-menu-hover');    
+                    menuInner.scrollTo({
+                        top: 0,
+                        behavior: "smooth" 
+                    }); 
+                } 
+               
             });
 
-            document.getElementById("collapse").setAttribute("data-collapsed", isCollapseds);
-            if(isCollapseds){
-                sidebar.classList.add("menu-collapse");
-                dot.style.display = 'bloack !important';
-                iconx.style.display = 'none !important';
-                dot.classList.remove("ti-circle-dot")
-                dot.classList.add("ti-circle") 
-            }
+            menuToggle.forEach((item) => {
+                item.addEventListener('click', () => {  
+                    const closeDiv = item.closest('.menu-item');
+                    closeDiv.classList.toggle('open'); 
+                });
+            });
         });
+
+        function toggleClass(element, class1, class2) {
+            if (element.classList.contains(class1)) {
+                element.classList.remove(class1);
+                element.classList.add(class2);
+            } else {
+                element.classList.remove(class2);
+                element.classList.add(class1);
+            }
+        }
 
          
         
