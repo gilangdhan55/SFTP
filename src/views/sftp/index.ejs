@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="layout-menu-fixed">
+<html lang="en" class="layout-menu-fixed layout-navbar-fixed">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,12 @@
         :root {
             --theme-bg: #2f3349;
             --bg-card: #25293c;
+            --bs-nav-link-padding-y: 0.5435rem;
+            --bs-nav-link-padding-x: 0;
+            --bs-nav-link-font-size: 0.9375rem;
+            --bs-nav-link-font-weight:500;
             --color-primary: #ffffff;
+            --bs-nav-link-color: rgb(255 255 255);
             --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         }
 
@@ -30,7 +35,7 @@
 
         .menu {
             display: none;
-        }
+        } 
         @media screen and (min-width: 1px) {
             .menu {
                 display: flex;
@@ -41,6 +46,22 @@
                 box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
                 overflow: hidden;
                 position: fixed;
+            }
+
+            .d-xl-none {
+                display: none !important;
+            }
+
+            .me-xl-0 {
+                margin-right: 0 !important;
+            }
+
+            .me-3 {
+                margin-right: 0.75rem !important;
+            }
+
+            .navbar-expand-xl .navbar-nav {
+                flex-direction: row;
             }
         }
  
@@ -121,10 +142,7 @@
         .menu .menu-inner .menu-item .menu-link .menu-text { 
             margin-right: 0.5rem;
         }
-
-        .menu-item{
-            
-        }
+ 
 
         .menu-icon {
             margin-right: 0.5rem;
@@ -358,8 +376,129 @@
         }
 
         /* navbar */
-        .layout-navbar-fixed:not(.layout-menu-collapsed)   {
+        .layout-navbar-fixed .layout-navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+        }
+
+        .layout-navbar-fixed:not(.layout-menu-collapsed) .layout-navbar{
             left: 16.25rem;
+        }
+
+        .layout-navbar-fixed .layout-navbar.navbar-detached {
+            width: calc(100% - 1.5rem* 2 - 16.25rem);
+        }
+
+        .layout-navbar.navbar-detached.container-xxl {
+            max-width: calc(1440px - 1.5rem* 2);
+        }
+        .layout-navbar.navbar-detached {
+            width: calc(100% - 1.5rem* 2);
+            margin: 1rem auto 0;
+            border-radius: 0.375rem;
+            padding: 0 1.5rem;
+        }
+        .navbar-detached {
+            box-shadow: 0 0.125rem 0.5rem 0 rgba(47,43,61,.12);
+        }
+
+        .layout-navbar {
+            background: var(--theme-bg);
+            box-shadow: 0 0 10px #3a405f;
+            backdrop-filter: saturate(200%) blur(6px);
+        }
+
+        .nav-link {
+            display: block;
+            padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+            font-size: var(--bs-nav-link-font-size);
+            font-weight: var(--bs-nav-link-font-weight);
+            color: var(--bs-nav-link-color);
+            background: none;
+            border: 0;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+        }
+
+        .bg-navbar-theme .navbar-nav>.nav-link, .bg-navbar-theme .navbar-nav>.nav-item>.nav-link, .bg-navbar-theme .navbar-nav>.nav>.nav-item>.nav-link {
+            color: #ffffff;
+        } 
+
+        .layout-menu-toggle {
+            display: block;
+        }
+
+        .layout-navbar .navbar-nav-right {
+            flex-basis: 100%;
+        }
+
+        .avatar {
+            position: relative;
+            width: 2.5rem;
+            height: 2.5rem;
+            cursor: pointer;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .avatar.avatar-online:after {
+            background-color: #28c76f;
+        }
+        .avatar.avatar-online:after, .avatar.avatar-offline:after, .avatar.avatar-away:after, .avatar.avatar-busy:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 3px;
+            width: 8px;
+            height: 8px;
+            border-radius: 100%;
+            box-shadow: 0 0 0 2px #fff;
+        }
+
+        .layout-navbar .navbar-dropdown.dropdown-user .dropdown-menu {
+            min-width: 14rem;
+        }
+
+        .layout-navbar .navbar-dropdown .dropdown-menu {
+            min-width: 22rem;
+            overflow: hidden;
+        }
+
+        .dropdown-menu {
+            box-shadow: 0 0.25rem 1.125rem 0 rgba(47,43,61,.16);
+        }
+
+        .dropdown-toggle.hide-arrow::before, .dropdown-toggle.hide-arrow::after, .dropdown-toggle-hide-arrow>.dropdown-toggle::before, .dropdown-toggle-hide-arrow>.dropdown-toggle::after {
+            display: none;
+        }
+
+        .layout-wrapper:not(.layout-horizontal) .layout-navbar .dropdown-menu[data-bs-popper] {
+            top: 147%;
+        }
+        .layout-navbar .navbar-dropdown .dropdown-menu {
+            min-width: 22rem;
+            overflow: hidden;
+        }
+
+        .dropdown-menu-end[data-bs-popper] {
+            right: 0;
+            left: auto;
+            background-color: var(--theme-bg);
+            color: var(--color-primary);
+        }
+
+        .font-primary{
+            color: var(--color-primary);
+        }
+
+        .dropdown-item:hover{
+            background: #6d6d6d4f;
+            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
+            color: #fff !important;
         }
     </style>
 </head>
@@ -424,19 +563,18 @@
         </aside>
         
         <div class="layout-page">
-            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center">
                 <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
                     <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                         <i class="ti ti-menu-2 ti-sm"></i>
                     </a>
                 </div>
                 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                    <ul class="navbar-nav flex-row align-items-center ms-auto">
-                        <!-- User -->
+                    <ul class="navbar-nav flex-row align-items-center ms-auto"> 
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="avatar avatar-online">
-                                    <img src="/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                    <img src="http://103.169.73.3/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -445,12 +583,12 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                                    <img src="http://103.169.73.3/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
                                                 </div>
                                             </div>
-                                            <div class="flex-grow-1">
-                                                <span class="fw-medium d-block">GILANG RAMADHAN</span>
-                                                <small class="text-muted">Developer</small>
+                                            <div class="flex-grow-1 font-primary">
+                                                <span class="fw-medium d-block font-primary">GILANG RAMADHAN</span>
+                                                <small class="font-primary">Developer</small>
                                             </div>
                                         </div>
                                     </a>
@@ -459,15 +597,15 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
+                                    <a class="dropdown-item font-primary" href="javascript:void(0)">
                                         <i class="ti ti-user-check me-2 ti-sm"></i>
-                                        <span class="align-middle">My Profile</span>
+                                        <span class="align-middle ">My Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
+                                    <a class="dropdown-item font-primary" href="javascript:void(0)">
                                         <i class="ti ti-settings me-2 ti-sm"></i>
-                                        <span class="align-middle">Settings</span>
+                                        <span class="align-middle ">Settings</span>
                                     </a>
                                 </li>
 
@@ -475,23 +613,20 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="https://app2.pkserve.com/pkvisit/apps/logout">
+                                    <a class="dropdown-item font-primary" href="https://app2.pkserve.com/pkvisit/apps/logout">
                                         <i class="ti ti-logout me-2 ti-sm"></i>
-                                        <span class="align-middle">Log Out</span>
+                                        <span class="align-middle ">Log Out</span>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        <!--/ User --> 
+                        </li> 
                     </ul>
                 </div>
 
-
-                <!-- Search Small Screens -->
-                <div class="navbar-search-wrapper search-input-wrapper  d-none">
+                <div class="navbar-search-wrapper search-input-wrapper d-none">
                     <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
                     <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
-                </div> 
+                </div>
             </nav>
             <h1>SFTP</h1>
             <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus laudantium labore nisi, explicabo suscipit, error accusamus delectus non atque numquam alias adipisci quibusdam aperiam maxime quos quas beatae vitae illum!</h1>
@@ -508,6 +643,9 @@
             const htmlPage      = document.querySelector('html');
             const menuToggle    = document.querySelectorAll(".menu-toggle");
             const menuInner     = document.querySelector('.menu-inner');
+            const dropDownUser  = document.querySelector('.dropdown-user');
+            const dropDown      = dropDownUser.querySelector('.dropdown-toggle.hide-arrow');
+            const ulDropDonw    = dropDownUser.querySelector('.dropdown-menu');
 
             collapseBtn.addEventListener("click", () => {
                 sidebar.classList.toggle("menu-collapse");
@@ -556,6 +694,24 @@
                     const closeDiv = item.closest('.menu-item');
                     closeDiv.classList.toggle('open'); 
                 });
+            });
+
+            dropDown.addEventListener('click', () => {
+                dropDown.classList.toggle('show'); 
+                ulDropDonw.classList.toggle('show');
+                if(ulDropDonw.getAttribute('data-bs-popper')){
+                    ulDropDonw.removeAttribute('data-bs-popper');
+                }else{
+                    ulDropDonw.setAttribute('data-bs-popper', 'static');
+                }
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!ulDropDonw.contains(event.target) && !dropDown.contains(event.target)) {  
+                    ulDropDonw.classList.remove('show');  
+                    dropDown.classList.remove('show');  
+                    ulDropDonw.removeAttribute('data-bs-popper'); 
+                }
             });
         });
 
