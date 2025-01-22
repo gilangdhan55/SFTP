@@ -15,10 +15,20 @@
             --bs-nav-link-font-size: 0.9375rem;
             --bs-nav-link-font-weight:500;
             --color-primary: #ffffff;
+            --color-secondary: #ffffffd4;
+            --font-color-primary: #7367f0;
             --bs-nav-link-color: rgb(255 255 255);
             --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
         }
-
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .text-muted{
+            color: var(--color-secondary) !important;
+        }
         body {
             scroll-behavior: smooth; 
             background: var(--bg-card);
@@ -27,16 +37,44 @@
             margin: 0;
         }
 
+        a{ 
+            text-decoration: none !important;
+        }
+
         .layout-wrapper {
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
-
         .menu {
             display: none;
         } 
-        @media screen and (min-width: 1px) {
+        .layout-navbar {
+            position: relative;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            height: 3.5rem;
+            flex-wrap: nowrap;
+            color: #6d6b77;
+            z-index: 2;
+        } 
+
+        .container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            width: 100%;
+            padding-right: calc(var(--bs-gutter-x)* .5);
+            padding-left: calc(var(--bs-gutter-x)* .5);
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (max-width: 1199.98px) {
+            .layout-navbar {
+                z-index: 1080;
+            }
+        }
+        @media screen and (min-width: 1200px) {
             .menu {
                 display: flex;
                 flex-direction: column;
@@ -63,8 +101,62 @@
             .navbar-expand-xl .navbar-nav {
                 flex-direction: row;
             }
-        }
+
+            .layout-navbar-fixed.layout-menu-collapsed .layout-content-navbar .layout-navbar, .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed .layout-content-navbar .layout-navbar {
+                left: 4.375rem;
+                width: calc(100% - 1.5rem* 2 - 4.375rem);
+            }
  
+            .layout-menu-fixed.layout-menu-collapsed .layout-page {
+                padding-left: 4.375rem;
+            }
+
+            .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-page {
+                padding-left: 4.375rem; 
+            }
+
+            .layout-navbar-fixed.layout-menu-collapsed:not(.layout-menu-hover, .menu-fixed) .layout-navbar.navbar-detached {
+                width: calc(100% - 1.5rem* 2 - 4.375rem);
+                left: 4.375rem;
+            }   
+            .layout-menu-fixed:not(.layout-menu-collapsed) .layout-page,  .layout-menu-fixed.layout-menu-collapsed .layout-page:has(.menu-collapse.menu-fixed) {
+                padding-left: 16.25rem;  
+            }
+
+            .layout-navbar-fixed:not(.layout-menu-collapsed, .layout-menu-hover) .layout-navbar.navbar-detached {
+                width: calc(100% - 1.1rem* 2 - 16.25rem);
+            }
+    
+             .layout-navbar-fixed:not(.layout-menu-collapsed) .layout-navbar{
+                left: 16.25rem;
+            }
+        }
+
+        @media (max-width: 1199.98px) {
+            .layout-menu-expanded .layout-menu {
+                transform: translate3d(0, 0, 0) !important;
+            }
+        }
+        .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+            padding-top: 78px !important;
+        }
+        @media (min-width: 1400px) {
+            .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+                max-width: calc(1440px - 1.5rem* 2);
+            }
+        }
+     
+        @media (min-width: 992px) {
+            .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+                padding-right: 1.5rem;
+                padding-left: 1.5rem;
+            }
+        }
+        .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+            padding-right: 1.1rem;
+            padding-left: 1.1rem;
+        }
+        
         .menu.menu-collapse {
             width: 4.375rem;
         }
@@ -107,10 +199,13 @@
             border-radius: 3px;
         }
 
+        .menu-item{
+            will-change: transform;
+        }
+
         .menu-item, .menu-header {
             list-style: none;
-            margin: 0.5rem 0;
-            
+            margin: 0.5rem 0; 
         }
 
         .menu-link, .menu-header {
@@ -203,6 +298,10 @@
         .menu.menu-collapse.menu-fixed{
             width: 16.25rem !important;
         }
+        
+        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse.menu-fixed, .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu.menu-collapse:not(.menu-fixed) {
+            z-index: 1085 !important;
+        }
 
         .menu.menu-collapse.menu-fixed .app-brand-logo {
             margin: 0!important;
@@ -246,27 +345,15 @@
             align-items: stretch;
             padding: 0;
         }
-
-        .layout-page {
-            padding-top: 56px !important;
-            transition: padding-left 0.3s ease-in-out;
+         
+        .layout-page { 
+            transition: padding-left 0.3s ease;
+        } 
+        
+        .navbar{
+            transition: left 0.3s ease;
         }
-
-        .layout-menu-fixed.layout-page {
-            transition: padding-left 0.65s linear;
-        }
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-page {
-            padding-left: 4.375rem; 
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed .layout-page {
-            padding-left: 4.375rem;
-        }
-
-        .layout-menu-fixed:not(.layout-menu-collapsed) .layout-page,  .layout-menu-fixed.layout-menu-collapsed .layout-page:has(.menu-collapse.menu-fixed) {
-            padding-left: 16.25rem;  
-        }
-
+ 
         .layout-page, .content-wrapper, .content-wrapper>*, .layout-menu {
             min-height: 1px;
         }
@@ -375,6 +462,20 @@
             color: #fff !important;
         }
 
+        .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal) .layout-page:before {
+            content: "";
+            width: 100%;
+            height: 4.5rem;
+            position: fixed;
+            top: 0px;
+            z-index: 10;
+        }
+        /* .layout-navbar-fixed .layout-page:before {
+            backdrop-filter: saturate(200%) blur(10px);
+            background: linear-gradient(180deg, rgba(248, 247, 250, 0.7) 44%, rgba(248, 247, 250, 0.43) 73%, rgba(248, 247, 250, 0));
+            -webkit-mask: linear-gradient(#f8f7fa, #f8f7fa 18%, transparent 100%);
+            mask: linear-gradient(#f8f7fa, #f8f7fa 18%, transparent 100%);
+        } */
         /* navbar */
         .layout-navbar-fixed .layout-navbar {
             position: fixed;
@@ -382,18 +483,16 @@
             right: 0;
             left: 0;
         }
-
-        .layout-navbar-fixed:not(.layout-menu-collapsed) .layout-navbar{
-            left: 16.25rem;
-        }
-
-        .layout-navbar-fixed .layout-navbar.navbar-detached {
-            width: calc(100% - 1.5rem* 2 - 16.25rem);
-        }
-
+ 
+        /* @media (min-width: 1400px) {
+            .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+                max-width: 1320px;
+            }
+        } */ 
         .layout-navbar.navbar-detached.container-xxl {
             max-width: calc(1440px - 1.5rem* 2);
         }
+        
         .layout-navbar.navbar-detached {
             width: calc(100% - 1.5rem* 2);
             margin: 1rem auto 0;
@@ -406,7 +505,7 @@
 
         .layout-navbar {
             background: var(--theme-bg);
-            box-shadow: 0 0 10px #3a405f;
+            box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
             backdrop-filter: saturate(200%) blur(6px);
         }
 
@@ -507,6 +606,110 @@
             font-weight: 500;
             text-shadow: 1px 2px 1px darkgrey;
         }
+        /* container */
+        html:not(.layout-footer-fixed) .content-wrapper {
+            padding-bottom: 0 !important;
+        }
+
+        .layout-content-navbar .content-wrapper {
+            width: 100%;
+        }
+
+        .content-wrapper {
+            padding-bottom: 54px !important;
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: stretch;
+            flex: 1 1 auto;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+  
+        .bg-footer-theme {
+            color: var(--color-primary);
+        }
+
+        .layout-navbar, .content-footer {
+            flex: 0 0 auto;
+        }
+
+        .content-footer .footer-container {
+            block-size: 54px; 
+            color: var(--font-color-primary) !important;
+        }
+
+        .bg-footer-theme .footer-link {
+            color: var(--font-color-primary) !important;
+        }
+        .text-primary {
+            color: var(--font-color-primary) !important;
+        }
+        .footer-link {
+            display: inline-block;
+            text-decoration: none !important;
+        }
+  
+        .text-primary {
+            --bs-text-opacity: 1;
+            color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+        }
+
+        .card{
+            background: var(--theme-bg);
+            color: var(--color-primary);
+            border: 0;
+            box-shadow: 0 0.125rem 0.5rem 0 rgb(47 43 61); 
+            border-radius: 0.375rem;
+            box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed:not(.layout-menu-hover, .menu-fixed) .row,  .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed.layout-menu-hover body .row {
+            --bs-gutter-x: -0.5rem;
+            --bs-gutter-y: 0;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: calc(-1* var(--bs-gutter-y));
+            margin-right: calc(-0.5* var(--bs-gutter-x));
+            margin-left: calc(-0.5* var(--bs-gutter-x));
+        }
+
+        .layout-menu-fixed.layout-navbar-fixed:not(.layout-menu-collapsed.layout-menu-hover, .layout-menu-collapsed) .row{ 
+            --bs-gutter-x: 0.5rem;
+        }
+
+        .container-p-y:not([class^=pb-]):not([class*=" pb-"]) {
+            padding-bottom: 1.5rem !important;
+        }
+
+        .container-p-y:not([class^=pt-]):not([class*=" pt-"]) {
+            padding-top: 1.5rem !important;
+        }
+
+        @media screen and (max-width: 991.98px) {
+            .layout-menu-fixed.layout-navbar-fixed.layout-menu-expanded:not(.layout-menu-collapsed, .layout-menu-hover) .menu{
+                display: flex;
+                flex-direction: column;
+                background: var(--theme-bg);
+                color: var(--color-primary);
+                transition: width 0.3s ease-in-out;
+                box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                position: fixed;
+                z-index: 1082;
+            }
+
+            .layout-menu-fixed.layout-navbar-fixed.layout-menu-expanded:not(.layout-menu-collapsed, .layout-menu-hover) .layout-block-content{
+                background-color: #00000073;
+                z-index: 1081;
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                transition: width 0.3s ease-in-out;
+            }
+        }
+        
     </style>
 </head>
 <body>
@@ -518,13 +721,13 @@
                 </div>
                 <div class="app-brand-text">SFTP</div>
                 <a href="javascript:void(0);"  class="layout-menu-toggle menu-link text-large ms-auto">
-                    <i class="ti ti-circle-dot d-none d-xl-block ti-sm align-middle toggle-collapse"  data-collapsed="true" id="icon"></i> 
-                    
+                    <i class="ti ti-circle-dot d-none d-xl-block ti-sm align-middle toggle-collapse"  data-collapsed="false" id="icon"></i>  
                     <i class="ti ti-x d-block d-xl-none ti-sm align-middle" id="icon-x"></i>
                 </a>
             </div>
             <ul class="menu-inner">
                  <% let i = 0 %>
+                 <% for(i = 0; i < 10; i++) { %>
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="menu-link <%= i === 0 ? 'active' : '' %>">
                             <i class="menu-icon ti ti-smart-home"></i>
@@ -541,7 +744,7 @@
                         <span class="menu-header-text">Master</span>
                     </li>
                     <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle dropdown-submenu">
                             <i class="menu-icon tf-icons ti ti-users"></i>
                             <div data-i18n="Datatables">Users</div>
                         </a>
@@ -566,12 +769,13 @@
                             </li>  
                         </ul>  
                     </li> 
+                    <% } %>
             </ul>
         </aside>
-        
+        <div class="layout-block-content"></div>
         <div class="layout-page">
             <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center">
-                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none" id="navTrigger">
                     <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                         <i class="ti ti-menu-2 ti-sm"></i>
                     </a>
@@ -635,92 +839,69 @@
                     <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
                 </div>
             </nav>
-            <h1>SFTP</h1>
-            <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus laudantium labore nisi, explicabo suscipit, error accusamus delectus non atque numquam alias adipisci quibusdam aperiam maxime quos quas beatae vitae illum!</h1>
+
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <div class="row">
+                        <div class="card px-2 py-2">
+                            <h1>sd</h1>
+                            </div>
+                    </div> 
+                </div>
+
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl">
+                        <div class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                            <div> © <span class="footer-year fw-bold"></span> <script>
+                                    document.querySelector('.footer-year').textContent = new Date().getFullYear();
+                                </script> <a href="https://pandurasa.com/" target="_blank" class="footer-link text-primary fw-medium">PT. Pandurasa Kharisma</a>
+                            </div> 
+                        </div>
+                    </div>
+                </footer>
+            </div>  
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const sidebar       = document.getElementById("sidebar");
-            const collapseBtn   = document.querySelector(".toggle-collapse");  
-            const iconx         = document.getElementById("icon-x");
-            const isCollapseds  = sessionStorage.getItem("menuCollapsed") === "true";
-            const classHtml     = sessionStorage.getItem("classHtml");
-            const htmlPage      = document.querySelector('html');
-            const menuToggle    = document.querySelectorAll(".menu-toggle");
-            const menuInner     = document.querySelector('.menu-inner');
-            const dropDownUser  = document.querySelector('.dropdown-user');
-            const dropDown      = dropDownUser.querySelector('.dropdown-toggle.hide-arrow');
-            const ulDropDonw    = dropDownUser.querySelector('.dropdown-menu');
-
-            collapseBtn.addEventListener("click", () => {
-                sidebar.classList.toggle("menu-collapse");
-                const isCollapsed = collapseBtn.getAttribute("data-collapsed") === "true";
-                collapseBtn.setAttribute("data-collapsed", !isCollapsed);
-                sessionStorage.setItem("menuCollapsed", !isCollapsed);  
-                htmlPage.classList.toggle('layout-menu-collapsed'); 
-                toggleClass(collapseBtn, "ti-circle-dot", "ti-circle"); 
-            });
-  
-            collapseBtn.setAttribute("data-collapsed", isCollapseds);
-            if(isCollapseds){
-                sidebar.classList.add("menu-collapse");
-                collapseBtn.style.display = 'bloack !important';
-                collapseBtn.classList.add("ti-circle") 
-                iconx.style.display = 'none !important';
-                collapseBtn.classList.remove("ti-circle-dot")
-                htmlPage.classList.add('layout-menu-collapsed'); 
+        const html              = document.querySelector('html');
+        const menuSideList      = html.querySelector('.menu-inner'); 
+        const sidebar           = document.getElementById('sidebar');
+        const toggleOnSidebar   = sidebar.querySelector('.app-brand .layout-menu-toggle'); 
+        const toggleShowNone    = toggleOnSidebar.querySelector('#icon');
+        const toggleX           = toggleOnSidebar.querySelector('#icon-x');
+        const menuItemSide      = menuSideList.querySelectorAll('.menu-item');
+           
+        let isCollapsed         = toggleShowNone.getAttribute('data-collapsed');
+        
+        document.addEventListener('DOMContentLoaded', () => { 
+            toggleShowNone.onclick = () => {
+                toggleDot(isCollapsed, toggleShowNone)
             }
 
-            sidebar.addEventListener('mouseenter', () => {
-                if(sidebar.classList.contains('menu-collapse')) { 
-                    htmlPage.classList.add('layout-menu-hover'); 
-                    iconx.style.display = 'none !important'; 
-                    sidebar.classList.add('menu-fixed');
-                    collapseBtn.style.display = 'block !important'; 
-                }
-            });
-
-            sidebar.addEventListener('mouseleave', () => {
-                sidebar.classList.remove('menu-fixed');
-                iconx.style.display = 'block !important';
-                collapseBtn.style.display = 'none !important';
-                if(sidebar.classList.contains('menu-collapse')) { 
-                    htmlPage.classList.remove('layout-menu-hover');    
-                    menuInner.scrollTo({
-                        top: 0,
-                        behavior: "smooth" 
-                    }); 
-                } 
-               
-            });
-
-            menuToggle.forEach((item) => {
-                item.addEventListener('click', () => {  
-                    const closeDiv = item.closest('.menu-item');
-                    closeDiv.classList.toggle('open'); 
+            menuItemSide.forEach((btn) => {
+                btn.addEventListener('click',() => {
+                    console.log(btn.querySelector('.menu-link'), btn.querySelector('.dropdown-submenu'))
+                    if(btn.querySelector('.menu-link') && btn.querySelector('.dropdown-submenu')){
+                        const dropdown  = btn.querySelector('.dropdown-submenu');
+                        const subMenu   = btn.querySelector('.menu-sub');
+                        dropdown.classList.toggle('show');
+                        subMenu.classList.toggle('show');
+                    }
                 });
             });
-
-            dropDown.addEventListener('click', () => {
-                dropDown.classList.toggle('show'); 
-                ulDropDonw.classList.toggle('show');
-                if(ulDropDonw.getAttribute('data-bs-popper')){
-                    ulDropDonw.removeAttribute('data-bs-popper');
-                }else{
-                    ulDropDonw.setAttribute('data-bs-popper', 'static');
-                }
-            });
-
-            document.addEventListener('click', (event) => {
-                if (!ulDropDonw.contains(event.target) && !dropDown.contains(event.target)) {  
-                    ulDropDonw.classList.remove('show');  
-                    dropDown.classList.remove('show');  
-                    ulDropDonw.removeAttribute('data-bs-popper'); 
-                }
-            });
         });
+         
+        const toggleDot = () => {
+            isCollapsed = !isCollapsed;
+            toggleClass(toggleShowNone, 'ti-circle-dot', 'ti-circle'); 
+            toggleShowNone.setAttribute('data-collapsed', isCollapsed); //set attribute collapse nya
+            sidebar.classList.toggle('menu-collapse', !isCollapsed); // untuk trigger jika true maka menu collapse di tutup
+            html.classList.toggle('layout-menu-collapsed', !isCollapsed); 
+            html.classList.toggle('layout-menu-hover', !isCollapsed);
+            // tambahakan event mouse over dan mouse out 
+            mouseHove.overNotExpanded(); 
+        }
 
         function toggleClass(element, class1, class2) {
             if (element.classList.contains(class1)) {
@@ -730,10 +911,35 @@
                 element.classList.remove(class2);
                 element.classList.add(class1);
             }
-        }
+        } 
 
-         
-        
+        const mouseHove = {
+            overNotExpanded: () =>{
+                sidebar.addEventListener('mouseenter', () => { 
+                    if (!sidebar.classList.contains('menu-collapse')) return;
+                    html.classList.add('layout-menu-hover'); 
+                    sidebar.classList.add('menu-fixed');
+                    toggleX.style.display           = 'none !important'; 
+                    toggleShowNone.style.display    = 'block !important';   
+                    mouseHove.leaveNotExpanded();
+                });
+            },
+            leaveNotExpanded: () => {
+                sidebar.addEventListener('mouseleave', () => {
+                    sidebar.classList.remove('menu-fixed');
+                    toggleX.style.display = 'block !important';
+                    toggleShowNone.style.display = 'none !important';
+
+                    if(sidebar.classList.contains('menu-collapse')) {
+                        html.classList.remove('layout-menu-hover');    
+                        menuSideList.scrollTo({
+                            top: 0,
+                            behavior: "smooth" 
+                        }); 
+                    }; 
+                });
+            }
+        }
     </script>
 </body>
 </html>
