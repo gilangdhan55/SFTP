@@ -1,718 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="layout-menu-fixed layout-navbar-fixed">
+<html lang="en" class="layout-menu-fixed layout-navbar-fixed" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidebar Collapse</title>
     <link rel="stylesheet" href="/css/boostrap/bootstrap.min.css">
     <link rel="stylesheet" href="/font/tabler_icon.css">
-    <style> 
-        :root {
-            --theme-bg: #2f3349;
-            --bg-card: #25293c;
-            --bs-nav-link-padding-y: 0.5435rem;
-            --bs-nav-link-padding-x: 0;
-            --bs-nav-link-font-size: 0.9375rem;
-            --bs-nav-link-font-weight:500;
-            --color-primary: #ffffff;
-            --color-secondary: #ffffffd4;
-            --font-color-primary: #7367f0;
-            --bs-nav-link-color: rgb(255 255 255);
-            --bs-font-sans-serif: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-        }
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .text-muted{
-            color: var(--color-secondary) !important;
-        }
-        body {
-            scroll-behavior: smooth; 
-            background: var(--bg-card);
-            color: var(--color-primary);
-            font-family: var(--bs-font-sans-serif);
-            margin: 0;
-        }
-
-        a{ 
-            text-decoration: none !important;
-        }
-
-        .layout-wrapper {
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .menu {
-            display: none;
-        } 
-        .layout-navbar {
-            position: relative;
-            padding-top: .5rem;
-            padding-bottom: .5rem;
-            height: 3.5rem;
-            flex-wrap: nowrap;
-            color: #6d6b77;
-            z-index: 2;
-        } 
-
-        .container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
-            --bs-gutter-x: 1.5rem;
-            --bs-gutter-y: 0;
-            width: 100%;
-            padding-right: calc(var(--bs-gutter-x)* .5);
-            padding-left: calc(var(--bs-gutter-x)* .5);
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        @media (max-width: 1199.98px) {
-            .layout-navbar {
-                z-index: 1080;
-            }
-        }
-        @media screen and (min-width: 1200px) {
-            .menu {
-                display: flex;
-                flex-direction: column;
-                background: var(--theme-bg);
-                color: var(--color-primary);
-                transition: width 0.3s ease-in-out;
-                box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
-                overflow: hidden;
-                position: fixed;
-            }
-
-            .d-xl-none {
-                display: none !important;
-            }
-
-            .me-xl-0 {
-                margin-right: 0 !important;
-            }
-
-            .me-3 {
-                margin-right: 0.75rem !important;
-            }
-
-            .navbar-expand-xl .navbar-nav {
-                flex-direction: row;
-            }
-
-            .layout-navbar-fixed.layout-menu-collapsed .layout-content-navbar .layout-navbar, .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed .layout-content-navbar .layout-navbar {
-                left: 4.375rem;
-                width: calc(100% - 1.5rem* 2 - 4.375rem);
-            }
- 
-            .layout-menu-fixed.layout-menu-collapsed .layout-page {
-                padding-left: 4.375rem;
-            }
-
-            .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-page {
-                padding-left: 4.375rem; 
-            }
-
-            .layout-navbar-fixed.layout-menu-collapsed:not(.layout-menu-hover, .menu-fixed) .layout-navbar.navbar-detached {
-                width: calc(100% - 1.5rem* 2 - 4.375rem);
-                left: 4.375rem;
-            }   
-            .layout-menu-fixed:not(.layout-menu-collapsed) .layout-page,  .layout-menu-fixed.layout-menu-collapsed .layout-page:has(.menu-collapse.menu-fixed) {
-                padding-left: 16.25rem;  
-            }
-
-            .layout-navbar-fixed:not(.layout-menu-collapsed, .layout-menu-hover) .layout-navbar.navbar-detached {
-                width: calc(100% - 1.1rem* 2 - 16.25rem);
-            }
-    
-             .layout-navbar-fixed:not(.layout-menu-collapsed) .layout-navbar{
-                left: 16.25rem;
-            }
-        }
-
-        @media (max-width: 1199.98px) {
-            .layout-menu-expanded .layout-menu {
-                transform: translate3d(0, 0, 0) !important;
-            }
-        }
-        .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
-            padding-top: 78px !important;
-        }
-        @media (min-width: 1400px) {
-            .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-                max-width: calc(1440px - 1.5rem* 2);
-            }
-        }
-     
-        @media (min-width: 992px) {
-            .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
-                padding-right: 1.5rem;
-                padding-left: 1.5rem;
-            }
-        }
-        .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
-            padding-right: 1.1rem;
-            padding-left: 1.1rem;
-        }
-        
-        .menu.menu-collapse {
-            width: 4.375rem;
-        }
-          
-        .menu:not(.menu-collapse) {
-            width: 16.25rem;
-        }
-
-        .menu .app-brand {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-            padding: 1rem 1rem 0 0.3rem;
-        }
-
-        .menu-collapse .app-brand-text {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
- 
-        .app-brand-logo img { 
-            width: 50px; 
-        }
- 
-        .menu-inner {
-            overflow-y: auto;
-            flex-grow: 1;
-            padding: 1rem 0.812rem;
-            height: 100vh;
-            padding-bottom: 4.3rem;
-        }
-
-        .menu-inner::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .menu-inner::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-        }
-
-        .menu-item{
-            will-change: transform;
-        }
-
-        .menu-item, .menu-header {
-            list-style: none;
-            margin: 0.5rem 0; 
-        }
-
-        .menu-link, .menu-header {
-            margin: 0 -5px;
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            color: var(--color-primary);
-            border-radius: 0.375rem;
-            position: relative;
-        }
-
-        /* .menu-link:not(.layout-menu-toggle):hover {
-            background: rgba(255, 255, 255, 0.1);
-        } */
-
-        .menu .menu-inner .menu-item .menu-link>span:not(.badge) {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            line-height: 1.467;
-        }
-        .menu .menu-inner .menu-item .menu-link {
-            font-size: 0.9375rem;
-            min-height: 38px;
-        }
-
-        .menu .menu-inner .menu-item .menu-link .menu-text { 
-            margin-right: 0.5rem;
-        }
- 
-
-        .menu-icon {
-            margin-right: 0.5rem;
-            font-size: 1.375rem;
-            text-align: center;
-        }
-
-        .menu-text{
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            transform: translateX(0px); 
-            opacity: 1;
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-header .menu-header-text {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner{
-            overflow: hidden;
-        }
-
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse .menu-inner .menu-header::before{
-            content: "";
-            position: absolute;
-            left: 1rem;
-            height: 1px;
-            width: 1.375rem;
-            background-color: #e6e6e8; 
-            transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi smooth */
-        }
-      
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse .menu-text {
-            /* display: none; */
-            opacity: 0;
-            transform: translateX(50px);
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .layout-content-navbar .menu.menu-collapse .menu-text {
-            /* display: none; */
-            opacity: 1;
-            transform: translateX(0px);
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu .menu-inner .menu-header:has(.menu-collapse) .menu-header-text{
-            opacity: 0;
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse .menu-header .menu-header-text{
-            opacity: 1;
-            transform: translateX(0px);
-        }
-         
-        .menu.menu-collapse.menu-fixed{
-            width: 16.25rem !important;
-        }
-        
-        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse.menu-fixed, .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu.menu-collapse:not(.menu-fixed) {
-            z-index: 1085 !important;
-        }
-
-        .menu.menu-collapse.menu-fixed .app-brand-logo {
-            margin: 0!important;
-        }
-
-        .menu-collapse.menu-fixed .menu-text { 
-            display: block;
-        }
-
-        .menu-collapse.menu-fixed .app-brand-text {
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .menu-vertical .menu-header {
-            padding: 1.25rem 1.5rem .375rem;
-        }
-
-        .menu-header {
-            opacity: 1;
-            transition: opacity .3s ease-in-out;
-        }
-
-        .menu-header .menu-header-text {
-            text-transform: uppercase;
-            letter-spacing: .4px;
-            white-space: nowrap;
-            color: #acaab1;  
-        }
- 
-        .layout-content-navbar .layout-page {
-            flex-basis: 100%;
-            flex-direction: column;
-            width: 0;
-            min-width: 0;
-            max-width: 100%;
-        }
-        .layout-page {
-            display: flex;
-            flex: 1 1 auto;
-            align-items: stretch;
-            padding: 0;
-        }
-         
-        .layout-page { 
-            transition: padding-left 0.3s ease;
-        } 
-        
-        .navbar{
-            transition: left 0.3s ease;
-        }
- 
-        .layout-page, .content-wrapper, .content-wrapper>*, .layout-menu {
-            min-height: 1px;
-        }
-
-        .menu-inner .menu-item .menu-link.active:not(.menu-toggle) {
-            background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%);
-            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
-            color: #fff !important;
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-item .menu-link>div {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed.layout-menu-hover .menu.menu-collapse.menu-fixed .menu-inner .menu-item .menu-link>div {
-            opacity: 1;
-            transform: translateX(0px);
-        }
-
-        .menu-inner .menu-item:not(.open)>.menu-sub {
-            display: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .menu-inner .menu-item.open>.menu-sub {
-            display: flex; 
-            flex-direction: column;
-            padding-left: 1rem;
-        }
-        .menu-inner .menu-item .menu-sub {  
-            transition: max-height .3s;
-        }
-
-        .menu-sub>.menu-item>.menu-link .menu-icon {
-            display: none;
-        }
-        .menu-sub>.menu-item>.menu-link:before {
-            content: "";
-            font-family: "tabler-icons";
-            position: absolute;
-            font-size: .75rem;
-            font-weight: bold;
-            left: 1.1rem;
-        }
-
-        .menu-sub>.menu-item>.menu-link>div {
-            padding-left: 1.3rem;
-        }
-        
-        .menu-sub>.menu-item>.menu-link .menu-icon {
-            display: none;
-        }
-  
-        .menu-inner .menu-item .menu-toggle::after {
-            right: .75rem;
-        }
-
-        .menu-toggle::after {
-            position: absolute;
-            top: 50%;
-            display: block;
-            font-family: "tabler-icons";
-            font-size: 1.375rem;
-            transform: translateY(-50%);
-        }
-
-        .layout-menu-fixed.layout-menu-collapsed:not(.layout-menu-hover) .layout-content-navbar .menu.menu-collapse:not(.menu-fixed) .menu-inner .menu-item .menu-link.menu-toggle::after { 
-            display: none;
-        }
-
-        .menu-toggle::after {
-            content: "";
-        }
-
-        .menu-inner .menu-item.open:not(.menu-item-closing)>.menu-link:after {
-            transform: translateY(-50%) rotate(90deg);
-        }
-        .menu-inner .menu-item .menu-toggle::after {
-            right: .75rem;
-        }
-        .menu:not(.menu-no-animation) .menu-toggle::after {
-            transition-duration: .3s;
-            transition-property: -webkit-transform, transform;
-        }
-
-        .menu-inner .menu-item .menu-toggle {
-            padding-right: calc(0.75rem + 1.76em);
-        }
-
-        .menu-link:not(.active, .layout-menu-toggle):hover{
-            background: #6d6d6d4f;
-            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
-            color: #fff !important;
-        }
-
-        .menu-item.open .menu-link:not(.menu-sub .menu-item .menu-link){
-            background: #6d6d6d4f;
-            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
-            color: #fff !important;
-        }
-        .menu-item.open .menu-link .menu-sub .menu-item .menu-link.active{ 
-            background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%);
-            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
-            color: #fff !important;
-        }
-
-        .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal) .layout-page:before {
-            content: "";
-            width: 100%;
-            height: 4.5rem;
-            position: fixed;
-            top: 0px;
-            z-index: 10;
-        }
-        /* .layout-navbar-fixed .layout-page:before {
-            backdrop-filter: saturate(200%) blur(10px);
-            background: linear-gradient(180deg, rgba(248, 247, 250, 0.7) 44%, rgba(248, 247, 250, 0.43) 73%, rgba(248, 247, 250, 0));
-            -webkit-mask: linear-gradient(#f8f7fa, #f8f7fa 18%, transparent 100%);
-            mask: linear-gradient(#f8f7fa, #f8f7fa 18%, transparent 100%);
-        } */
-        /* navbar */
-        .layout-navbar-fixed .layout-navbar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-        }
- 
-        /* @media (min-width: 1400px) {
-            .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-                max-width: 1320px;
-            }
-        } */ 
-        .layout-navbar.navbar-detached.container-xxl {
-            max-width: calc(1440px - 1.5rem* 2);
-        }
-        
-        .layout-navbar.navbar-detached {
-            width: calc(100% - 1.5rem* 2);
-            margin: 1rem auto 0;
-            border-radius: 0.375rem;
-            padding: 0 1.5rem;
-        }
-        .navbar-detached {
-            box-shadow: 0 0.125rem 0.5rem 0 rgba(47,43,61,.12);
-        }
-
-        .layout-navbar {
-            background: var(--theme-bg);
-            box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
-            backdrop-filter: saturate(200%) blur(6px);
-        }
-
-        .nav-link {
-            display: block;
-            padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-            font-size: var(--bs-nav-link-font-size);
-            font-weight: var(--bs-nav-link-font-weight);
-            color: var(--bs-nav-link-color);
-            background: none;
-            border: 0;
-            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-        }
-
-        .bg-navbar-theme .navbar-nav>.nav-link, .bg-navbar-theme .navbar-nav>.nav-item>.nav-link, .bg-navbar-theme .navbar-nav>.nav>.nav-item>.nav-link {
-            color: #ffffff;
-        } 
-
-        .layout-menu-toggle {
-            display: block;
-        }
-
-        .layout-navbar .navbar-nav-right {
-            flex-basis: 100%;
-        }
-
-        .avatar {
-            position: relative;
-            width: 2.5rem;
-            height: 2.5rem;
-            cursor: pointer;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .avatar.avatar-online:after {
-            background-color: #28c76f;
-        }
-        .avatar.avatar-online:after, .avatar.avatar-offline:after, .avatar.avatar-away:after, .avatar.avatar-busy:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            right: 3px;
-            width: 8px;
-            height: 8px;
-            border-radius: 100%;
-            box-shadow: 0 0 0 2px #fff;
-        }
-
-        .layout-navbar .navbar-dropdown.dropdown-user .dropdown-menu {
-            min-width: 14rem;
-        }
-
-        .layout-navbar .navbar-dropdown .dropdown-menu {
-            min-width: 22rem;
-            overflow: hidden;
-        }
-
-        .dropdown-menu {
-            box-shadow: 0 0.25rem 1.125rem 0 rgba(47,43,61,.16);
-        }
-
-        .dropdown-toggle.hide-arrow::before, .dropdown-toggle.hide-arrow::after, .dropdown-toggle-hide-arrow>.dropdown-toggle::before, .dropdown-toggle-hide-arrow>.dropdown-toggle::after {
-            display: none;
-        }
-
-        .layout-wrapper:not(.layout-horizontal) .layout-navbar .dropdown-menu[data-bs-popper] {
-            top: 147%;
-        }
-        .layout-navbar .navbar-dropdown .dropdown-menu {
-            min-width: 22rem;
-            overflow: hidden;
-        }
-
-        .dropdown-menu-end[data-bs-popper] {
-            right: 0;
-            left: auto;
-            background-color: var(--theme-bg);
-            color: var(--color-primary);
-        }
-
-        .font-primary{
-            color: var(--color-primary);
-        }
-
-        .dropdown-item:hover{
-            background: #6d6d6d4f;
-            box-shadow: 0px 2px 6px 0px rgba(115, 103, 240, .3);
-            color: #fff !important;
-        }
-
-        .app-brand-text {
-            font-size: 1.64em;
-            letter-spacing: 10px;
-            font-weight: 500;
-            text-shadow: 1px 2px 1px darkgrey;
-        }
-        /* container */
-        html:not(.layout-footer-fixed) .content-wrapper {
-            padding-bottom: 0 !important;
-        }
-
-        .layout-content-navbar .content-wrapper {
-            width: 100%;
-        }
-
-        .content-wrapper {
-            padding-bottom: 54px !important;
-        }
-
-        .content-wrapper {
-            display: flex;
-            align-items: stretch;
-            flex: 1 1 auto;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-  
-        .bg-footer-theme {
-            color: var(--color-primary);
-        }
-
-        .layout-navbar, .content-footer {
-            flex: 0 0 auto;
-        }
-
-        .content-footer .footer-container {
-            block-size: 54px; 
-            color: var(--font-color-primary) !important;
-        }
-
-        .bg-footer-theme .footer-link {
-            color: var(--font-color-primary) !important;
-        }
-        .text-primary {
-            color: var(--font-color-primary) !important;
-        }
-        .footer-link {
-            display: inline-block;
-            text-decoration: none !important;
-        }
-  
-        .text-primary {
-            --bs-text-opacity: 1;
-            color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
-        }
-
-        .card{
-            background: var(--theme-bg);
-            color: var(--color-primary);
-            border: 0;
-            box-shadow: 0 0.125rem 0.5rem 0 rgb(47 43 61); 
-            border-radius: 0.375rem;
-            box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed:not(.layout-menu-hover, .menu-fixed) .row,  .layout-menu-fixed.layout-navbar-fixed.layout-menu-collapsed.layout-menu-hover body .row {
-            --bs-gutter-x: -0.5rem;
-            --bs-gutter-y: 0;
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: calc(-1* var(--bs-gutter-y));
-            margin-right: calc(-0.5* var(--bs-gutter-x));
-            margin-left: calc(-0.5* var(--bs-gutter-x));
-        }
-
-        .layout-menu-fixed.layout-navbar-fixed:not(.layout-menu-collapsed.layout-menu-hover, .layout-menu-collapsed) .row{ 
-            --bs-gutter-x: 0.5rem;
-        }
-
-        .container-p-y:not([class^=pb-]):not([class*=" pb-"]) {
-            padding-bottom: 1.5rem !important;
-        }
-
-        .container-p-y:not([class^=pt-]):not([class*=" pt-"]) {
-            padding-top: 1.5rem !important;
-        }
-
-        @media screen and (max-width: 991.98px) {
-            .layout-menu-fixed.layout-navbar-fixed.layout-menu-expanded:not(.layout-menu-collapsed, .layout-menu-hover) .menu{
-                display: flex;
-                flex-direction: column;
-                background: var(--theme-bg);
-                color: var(--color-primary);
-                transition: width 0.3s ease-in-out;
-                box-shadow: 3px 0 9px 0 rgba(0, 0, 0, 0.5);
-                overflow: hidden;
-                position: fixed;
-                z-index: 1082;
-            }
-
-            .layout-menu-fixed.layout-navbar-fixed.layout-menu-expanded:not(.layout-menu-collapsed, .layout-menu-hover) .layout-block-content{
-                background-color: #00000073;
-                z-index: 1081;
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                transition: width 0.3s ease-in-out;
-            }
-        }
-        
-    </style>
+    <link rel="stylesheet" href="/css/core.css">
 </head>
-<body>
+<body data-bs-theme="dark">
     <div class="layout-wrapper layout-content-navbar">
         <aside id="sidebar" class="menu">
             <div class="app-brand">
@@ -727,7 +23,7 @@
             </div>
             <ul class="menu-inner">
                  <% let i = 0 %>
-                 <% for(i = 0; i < 10; i++) { %>
+                 <% for(i = 0; i < 1; i++) { %>
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="menu-link <%= i === 0 ? 'active' : '' %>">
                             <i class="menu-icon ti ti-smart-home"></i>
@@ -750,7 +46,7 @@
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="https://app2.pkserve.com/pkvisit/master/users" class="menu-link active">
+                                <a href="https://app2.pkserve.com/pkvisit/master/users" class="menu-link">
                                     <i class="menu-icon tf-icons ti ti-users"></i>
                                     <div>Users</div>
                                 </a>
@@ -841,7 +137,7 @@
             </nav>
 
             <div class="content-wrapper">
-                <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="container-xxl flex-grow-1 container-p-y con-cust-view">
                     <div class="row">
                         <div class="card px-2 py-2">
                             <h1>sd</h1>
@@ -867,40 +163,126 @@
         const html              = document.querySelector('html');
         const menuSideList      = html.querySelector('.menu-inner'); 
         const sidebar           = document.getElementById('sidebar');
+        const sessionSidebar    = sessionStorage.getItem('menuCollapsed') === 'true';
         const toggleOnSidebar   = sidebar.querySelector('.app-brand .layout-menu-toggle'); 
         const toggleShowNone    = toggleOnSidebar.querySelector('#icon');
         const toggleX           = toggleOnSidebar.querySelector('#icon-x');
         const menuItemSide      = menuSideList.querySelectorAll('.menu-item');
-           
-        let isCollapsed         = toggleShowNone.getAttribute('data-collapsed');
+        const dropDownUser      = document.querySelector('.dropdown-user');
+        const ulDropUser        = dropDownUser.querySelector('.dropdown-menu');
+        const toggleNav         = document.querySelector('#navTrigger'); //top trigger nav
+        const aToggleNav        = toggleNav.querySelector('a');
+        let isCollapsed         = sessionSidebar;
+        let disTempHoverSide    = true;
         
         document.addEventListener('DOMContentLoaded', () => { 
+            setDefaultHtml();
             toggleShowNone.onclick = () => {
                 toggleDot(isCollapsed, toggleShowNone)
-            }
-
-            menuItemSide.forEach((btn) => {
+            } 
+            menuItemSide.forEach((btn) => { 
                 btn.addEventListener('click',() => {
-                    console.log(btn.querySelector('.menu-link'), btn.querySelector('.dropdown-submenu'))
-                    if(btn.querySelector('.menu-link') && btn.querySelector('.dropdown-submenu')){
-                        const dropdown  = btn.querySelector('.dropdown-submenu');
-                        const subMenu   = btn.querySelector('.menu-sub');
-                        dropdown.classList.toggle('show');
-                        subMenu.classList.toggle('show');
+                    const isOpen = btn.classList.contains('open');
+                    menuItemSide.forEach((otherBtn) => { 
+                        otherBtn.classList.remove('open');
+                    }); 
+                    
+                    if(btn.querySelector('.menu-link') && btn.querySelector('.dropdown-submenu')){ 
+                        if (!isOpen) {
+                            btn.classList.add('open');
+                        }
                     }
                 });
             });
+
+            dropDownUser.addEventListener('click', () => {
+                dropDownUser.querySelector('a').classList.toggle('show'); 
+                ulDropUser.classList.toggle('show');
+                if(ulDropUser.getAttribute('data-bs-popper')){
+                    ulDropUser.removeAttribute('data-bs-popper');
+                }else{
+                    ulDropUser.setAttribute('data-bs-popper', 'static');
+                }
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!ulDropUser.contains(event.target) && !dropDownUser.contains(event.target)) {  
+                    ulDropUser.classList.remove('show');  
+                    dropDownUser.querySelector('a').classList.remove('show');  
+                    ulDropUser.removeAttribute('data-bs-popper'); 
+                }
+            });
+
+            aToggleNav.addEventListener('click', () => {  
+                showSideBar();
+            });
         });
+
+        const setDefaultHtml = () => { 
+            toggleShowNone.setAttribute('data-collapsed', isCollapsed);
+            if(isCollapsed){
+                sidebar.classList.add('menu-collapse');
+                html.classList.add('layout-menu-collapsed'); 
+                disTempHoverSide = isCollapsed;
+                toggleClass(toggleShowNone, 'ti-circle-dot', 'ti-circle'); 
+                if(disTempHoverSide){
+                    setTimeout(() => {
+                        if(sidebar.classList.contains('menu-collapse')) {
+                            menuSideList.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        }
+                        disTempHoverSide = true;
+                        mouseHove.overNotExpanded(); 
+                    }, 200);
+                    return;
+                }  
+            }
+        }
          
         const toggleDot = () => {
-            isCollapsed = !isCollapsed;
+            isCollapsed = !isCollapsed === true;  
+            disTempHoverSide = false;  
             toggleClass(toggleShowNone, 'ti-circle-dot', 'ti-circle'); 
             toggleShowNone.setAttribute('data-collapsed', isCollapsed); //set attribute collapse nya
-            sidebar.classList.toggle('menu-collapse', !isCollapsed); // untuk trigger jika true maka menu collapse di tutup
-            html.classList.toggle('layout-menu-collapsed', !isCollapsed); 
-            html.classList.toggle('layout-menu-hover', !isCollapsed);
-            // tambahakan event mouse over dan mouse out 
-            mouseHove.overNotExpanded(); 
+            sidebar.classList.toggle('menu-collapse'); // untuk trigger jika true maka menu collapse di tutup
+            html.classList.toggle('layout-menu-collapsed'); 
+            html.classList.remove('layout-menu-hover'); 
+            sessionStorage.setItem('menuCollapsed', isCollapsed)
+            // // tambahakan event mouse over dan mouse out   
+            if(!disTempHoverSide){
+                setTimeout(() => {
+                    if(sidebar.classList.contains('menu-collapse')) {
+                        menuSideList.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+                    }
+                    disTempHoverSide = true;
+                    mouseHove.overNotExpanded(); 
+                }, 200);
+                return;
+            }  
+        }
+
+        const showSideBar = () => {
+            const outSidebarX   = document.querySelector('.layout-block-content');
+            const xCollapse     = document.getElementById('icon-x');
+            html.classList.add('layout-menu-expanded');
+            html.classList.remove('layout-menu-collapsed');
+            outSidebarX.classList.remove('menu-collapse');
+            outSidebarX.style.display = 'block';
+            if(html.classList.contains('layout-menu-expanded')){
+                outSidebarX.addEventListener('click', () => { 
+                    outSidebarX.style.display = 'none';
+                    html.classList.remove('layout-menu-expanded');
+                }); 
+                xCollapse.addEventListener('click', () =>{
+                    outSidebarX.style.display = 'none';
+                    html.classList.remove('layout-menu-expanded');
+                })
+            } 
         }
 
         function toggleClass(element, class1, class2) {
@@ -916,7 +298,7 @@
         const mouseHove = {
             overNotExpanded: () =>{
                 sidebar.addEventListener('mouseenter', () => { 
-                    if (!sidebar.classList.contains('menu-collapse')) return;
+                    if (!sidebar.classList.contains('menu-collapse')) return; 
                     html.classList.add('layout-menu-hover'); 
                     sidebar.classList.add('menu-fixed');
                     toggleX.style.display           = 'none !important'; 
