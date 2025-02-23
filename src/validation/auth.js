@@ -10,8 +10,14 @@ const sanitization = (data) => {
 }
 
 const registerValid = (dt) => { 
+    if(validator.isEmpty(JSON.stringify(dt))){
+        
+        console.log('kosong')
+    }
+    return;
     let data                = sanitization(dt);
- 
+    
+    
     const validationCheck   = [
         {condition: validator.isEmpty(data.nama), message: "Nama tidak boleh kosong"},
         {condition: validator.isEmpty(data.username), message: "Username tidak boleh kosong"},
@@ -31,7 +37,8 @@ const registerValid = (dt) => {
 
 
 const loginValid = (dt) => {
-    let {username, password}    = sanitization(dt);
+    if(Object.keys(dt).length === 0) return {status : false,  message: "Authentication data cannot be empty"};
+    let {username, password} = sanitization(dt);
 
     const validationCheck   = [ 
         {condition: validator.isEmpty(username), message: "Username tidak boleh kosong"},
@@ -40,7 +47,7 @@ const loginValid = (dt) => {
 
     for(let check of validationCheck){
         if(check.condition){
-            return {status : false, data: [], message: check.message};
+            return {status : false, message: check.message};
         }
     }
 

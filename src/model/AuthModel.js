@@ -29,7 +29,7 @@ const userSchema  = new mongoose.Schema({
         type: String,
         required: true
     },
-    service: { // Array of subdocuments
+    service: {  
         type: [serviceSchema],
         required: true,
         validate: {

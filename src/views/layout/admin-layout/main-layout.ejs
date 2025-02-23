@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="layout-menu-fixed layout-navbar-fixed" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar Collapse</title>
+    <!-- <link rel="stylesheet" href="/css/boostrap/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/font/tabler_icon.css">
+    <link rel="stylesheet" href="/css/core.css">
+</head>
+<body data-bs-theme="dark">
+    <div class="layout-wrapper layout-content-navbar">
+        <%- include('sidebar') %>
+        <div class="layout-block-content"></div>
+        <div class="layout-page">
+            <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center">
+                <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none" id="navTrigger">
+                    <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                        <i class="ti ti-menu-2 ti-sm"></i>
+                    </a>
+                </div>
+                <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <ul class="navbar-nav flex-row align-items-center ms-auto"> 
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="avatar avatar-online">
+                                    <img src="http://103.169.73.3/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar avatar-online">
+                                                    <img src="http://103.169.73.3/pkvisit/assets/vuexy/assets/img/avatars/1.png" alt="" class="h-auto rounded-circle">
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 font-primary">
+                                                <span class="fw-medium d-block font-primary">GILANG RAMADHAN</span>
+                                                <small class="font-primary">Developer</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item font-primary" href="javascript:void(0)">
+                                        <i class="ti ti-user-check me-2 ti-sm"></i>
+                                        <span class="align-middle ">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item font-primary" href="javascript:void(0)">
+                                        <i class="ti ti-settings me-2 ti-sm"></i>
+                                        <span class="align-middle ">Settings</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item font-primary" href="https://app2.pkserve.com/pkvisit/apps/logout">
+                                        <i class="ti ti-logout me-2 ti-sm"></i>
+                                        <span class="align-middle ">Log Out</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </div>
+
+                <div class="navbar-search-wrapper search-input-wrapper d-none">
+                    <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..." aria-label="Search...">
+                    <i class="ti ti-x ti-sm search-toggler cursor-pointer"></i>
+                </div>
+            </nav>
+
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y con-cust-view">
+                    <%- body %>
+                </div>
+
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl">
+                        <div class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                            <div> © <span class="footer-year fw-bold"></span> <script>
+                                    document.querySelector('.footer-year').textContent = new Date().getFullYear();
+                                </script> <a href="https://pandurasa.com/" target="_blank" class="footer-link text-primary fw-medium">PT. Pandurasa Kharisma</a>
+                            </div> 
+                        </div>
+                    </div>
+                </footer>
+            </div>  
+        </div>
+    </div>
+ 
+<script src="/js/core.js"></script>
+</body>
+</html>

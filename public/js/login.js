@@ -9,12 +9,8 @@ const sanitaze  = (data) => {
 }; 
 
 const validation = (dt) => {
-    const data = sanitaze(dt);
-    
-    if(data.username == '' || data.password == ''){
-        return false;
-    }
-
+    const data = sanitaze(dt); 
+    if(data.username == '' || data.password == '') return false; 
     return data;
 }
 
@@ -52,7 +48,8 @@ const action = {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(data) 
+            body: JSON.stringify(data),
+            credentials: "include"
         }
 
         const {response, status} = await fetchData('/login',config);

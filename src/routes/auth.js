@@ -1,12 +1,12 @@
 import express from "express";
-import {login, process, saveSignup} from '../controller/AuthController.js';
+import {login, processLogin, saveSignup} from '../controller/AuthController.js';
 
 const authRoutes = express.Router();
 
 authRoutes
     .route("/login")
     .get(login)
-    .post(process);
+    .post(processLogin);
 
 authRoutes
     .route("/register") 

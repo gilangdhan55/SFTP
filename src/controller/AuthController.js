@@ -1,6 +1,8 @@
 import {registerValid, loginValid}  from "../validation/auth.js"; 
 import usersCollection from "../model/AuthModel.js";
-import {encript, compare} from "../utils/bcrypt.js";
+import {encript, compare} from "../utils/bcrypt.js"; 
+import jwt from "jsonwebtoken";
+const SECRET_KEY = process.env.SECRET_KEY;
   
 export const login = (req, res) => {
     const data = {
@@ -9,12 +11,10 @@ export const login = (req, res) => {
     } 
     res.render("login", data);
 }
-
-
-export const process = async (req, res) => {
-    const {data, status, message}    = await loginValid(req.body); 
-    if(!status) return res.status(400).json({status, message}); 
-    
+ 
+export const processLogin = async (req, res) => { 
+    const {data, status, message}    = await loginValid(req.body);  
+    if(!status) return res.status(400).json({status, message});  
     const available = await usersCollection.findByUsername(data.username);
    
     if(available === null){
@@ -22,8 +22,7 @@ export const process = async (req, res) => {
             status: false,
             message: "User not found",
         });
-    }
-
+    } 
     const isMatch = await compare(req.body.password, available.password);
 
     if(!isMatch){
@@ -31,20 +30,26 @@ export const process = async (req, res) => {
             status: false,
             message: "User not found",
         });
-    }
-
-    return res.status(200).json({
+    } 
+    const token = jwt.sign({ id: available.id, username: available.username }, SECRET_KEY, { expiresIn: "1h" });
+     
+    res.cookie("token", token, { 
+        httpOnly: true,  
+        secure: false,  
+        sameSite: "lax",
+    }); 
+    console.log(req.cookies); 
+    res.status(200).json({
         status: true,
         message: "User logged in successfully",
+        token: token
     }); 
 }
 
 export const saveSignup = async (req, res) => {
     const {status, data, message} = await registerValid(req.body);
     
-    if(!status){
-        return res.status(400).json({status, message});
-    } 
+    if(!status) return res.status(400).json({status, message});
     
     try {
         const available = await usersCollection.findByUsername(data.username);

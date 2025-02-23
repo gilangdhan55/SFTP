@@ -1,0 +1,55 @@
+<aside id="sidebar" class="menu">
+    <div class="app-brand">
+        <div class="app-brand-logo">
+            <img src="/img/pklogo.png"  class="img-icon" alt="pk-logo">
+        </div>
+        <div class="app-brand-text">SFTP</div>
+        <a href="javascript:void(0);"  class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti ti-circle-dot d-none d-xl-block ti-sm align-middle toggle-collapse"  data-collapsed="false" id="icon"></i>  
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle" id="icon-x"></i>
+        </a>
+    </div>
+    <ul class="menu-inner"> 
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link">
+                    <i class="menu-icon ti ti-smart-home"></i>
+                    <span class="menu-text">Home</span>
+                </a>
+            </li> 
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Report</span>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(0)" class="menu-link <%= path == '/sftp' ? 'active' : '' %>">
+                    <i class="menu-icon ti ti-cube-send"></i>
+                    <span class="menu-text">Coldspace</span>
+                </a>
+            </li> 
+            <li class="menu-item hide">
+                <a href="javascript:void(0);" class="menu-link menu-toggle dropdown-submenu">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div data-i18n="Datatables">Users</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-users"></i>
+                            <div>Users</div>
+                        </a>
+                    </li>  
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link ">
+                            <i class="menu-icon tf-icons ti ti-users"></i>
+                            <div>Position</div>
+                        </a>
+                    </li>  
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link ">
+                            <i class="menu-icon tf-icons ti ti-users"></i>
+                            <div>Role</div>
+                        </a>
+                    </li>  
+                </ul>  
+            </li>  
+    </ul>
+</aside>

@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser"; 
-import multer from "multer"; 
+import multer from "multer";  
 import "../logs/winston.js";
 
 const appMiddleWare     = express(); 
@@ -12,9 +12,12 @@ import expressEjsLayouts from "express-ejs-layouts";
 import flash from "express-flash";
 import path from "path";
 import url from "url";
+import ejs from "ejs";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-
+ 
+appMiddleWare.engine("html", ejs.renderFile);
+appMiddleWare.set("view engine", "ejs");
 appMiddleWare.use(expressEjsLayouts); 
 appMiddleWare.use(express.static(path.join(__dirname, "../../public")));
 appMiddleWare.use(upload.array());
@@ -26,13 +29,12 @@ appMiddleWare.use(session({
     resave: true,
     saveUninitialized: true,
     cookie: {
-        maxAge: 30 * 60 * 1000, // Durasi sesi: 30 menit (dalam milidetik)
-        secure: false,          // Atur true jika menggunakan HTTPS
-        httpOnly: false,          // Lindungi cookie dari akses JavaScript
-        domain: "localhost",      // Atur domain jika menggunakan HTTPS
-    }
-
+        maxAge: 30 * 60 * 1000,  
+        secure: false, 
+        httpOnly: true,       
+    } 
 }));
-appMiddleWare.use(flash());    
+appMiddleWare.use(flash());
+    
 export default appMiddleWare;
 

@@ -1,0 +1,75 @@
+[2025-02-21 14:52:13] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:34:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:17:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 14:52:41] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:34:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:18:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 14:55:26] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:39:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:18:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 14:55:59] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:40:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:18:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 14:56:11] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:40:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:18:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 14:56:43] [logger] error: uncaughtException: Expected a string but received a undefined
+TypeError: Expected a string but received a undefined
+    at assertString (C:\node\SFTP\node_modules\validator\lib\util\assertString.js:13:11)
+    at ltrim (C:\node\SFTP\node_modules\validator\lib\ltrim.js:10:29)
+    at Object.trim (C:\node\SFTP\node_modules\validator\lib\trim.js:11:49)
+    at sanitization (file:///C:/node/SFTP/src/validation/auth.js:6:46)
+    at loginValid (file:///C:/node/SFTP/src/validation/auth.js:40:35)
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:18:46)
+    at Layer.handle [as handle_request] (C:\node\SFTP\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:149:13)
+    at next (C:\node\SFTP\node_modules\express\lib\router\route.js:145:7)
+    at Route.dispatch (C:\node\SFTP\node_modules\express\lib\router\route.js:119:3)
+[2025-02-21 16:03:41] [logger] error: uncaughtException: dayjs is not defined
+ReferenceError: dayjs is not defined
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:40:46)

@@ -1,0 +1,9 @@
+[2025-02-22 10:02:32] [logger] error: uncaughtException: res.cookies is not a function
+TypeError: res.cookies is not a function
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:36:9)
+[2025-02-22 10:02:33] [logger] error: uncaughtException: res.cookies is not a function
+TypeError: res.cookies is not a function
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:36:9)
+[2025-02-22 10:02:34] [logger] error: uncaughtException: res.cookies is not a function
+TypeError: res.cookies is not a function
+    at processLogin (file:///C:/node/SFTP/src/controller/AuthController.js:36:9)
